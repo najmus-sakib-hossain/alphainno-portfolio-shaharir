@@ -102,6 +102,48 @@
 </div>
 
 <style>
+    :root {
+        --background: oklch(0.145 0 0);
+        --foreground: oklch(0.985 0 0);
+        --card: oklch(0.205 0 0);
+        --card-foreground: oklch(0.985 0 0);
+        --popover: oklch(0.269 0 0);
+        --popover-foreground: oklch(0.985 0 0);
+        --primary: oklch(0.922 0 0);
+        --primary-foreground: oklch(0.205 0 0);
+        --secondary: oklch(0.269 0 0);
+        --secondary-foreground: oklch(0.985 0 0);
+        --muted: oklch(0.269 0 0);
+        --muted-foreground: oklch(0.708 0 0);
+        --accent: oklch(0.371 0 0);
+        --accent-foreground: oklch(0.985 0 0);
+        --destructive: oklch(0.704 0.191 22.216);
+        --border: oklch(1 0 0 / 10%);
+        --input: oklch(1 0 0 / 15%);
+        --ring: oklch(0.556 0 0);
+        --chart-1: var(--color-blue-300);
+        --chart-2: var(--color-blue-500);
+        --chart-3: var(--color-blue-600);
+        --chart-4: var(--color-blue-700);
+        --chart-5: var(--color-blue-800);
+        --sidebar: oklch(0.205 0 0);
+        --sidebar-foreground: oklch(0.985 0 0);
+        --sidebar-primary: oklch(0.488 0.243 264.376);
+        --sidebar-primary-foreground: oklch(0.985 0 0);
+        --sidebar-accent: oklch(0.269 0 0);
+        --sidebar-accent-foreground: oklch(0.985 0 0);
+        --sidebar-border: oklch(1 0 0 / 10%);
+        --sidebar-ring: oklch(0.439 0 0);
+        --surface: oklch(0.2 0 0);
+        --surface-foreground: oklch(0.708 0 0);
+        --code: var(--surface);
+        --code-foreground: var(--surface-foreground);
+        --code-highlight: oklch(0.27 0 0);
+        --code-number: oklch(0.72 0 0);
+        --selection: oklch(0.922 0 0);
+        --selection-foreground: oklch(0.205 0 0);
+    }
+
     .profile-modal-overlay {
         display: none;
         position: fixed;
@@ -138,7 +180,7 @@
     }
 
     .profile-modal-container {
-        background: white;
+        background: var(--background);
         border-radius: 1rem;
         width: 90%;
         max-width: 600px;
@@ -146,10 +188,11 @@
         overflow: hidden;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         animation: slideUp 0.3s ease;
+        color: var(--foreground);
     }
 
     .profile-modal-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: var(--accent);
         padding: 1.5rem;
         display: flex;
         align-items: center;
@@ -206,15 +249,14 @@
         height: 150px;
         border-radius: 50%;
         object-fit: cover;
-        border: 5px solid #667eea;
-        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        border: 5px solid var(--primary);
     }
 
     .profile-image-badge {
         position: absolute;
         bottom: 5px;
         right: 5px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: var(--primary-foreground);
         width: 45px;
         height: 45px;
         border-radius: 50%;
@@ -223,7 +265,6 @@
         justify-content: center;
         color: white;
         font-size: 1.2rem;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .profile-upload-section {
@@ -232,7 +273,7 @@
 
     .profile-upload-btn {
         display: inline-block;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: var(--secondary);
         color: white;
         padding: 0.75rem 2rem;
         border-radius: 50px;
@@ -240,16 +281,14 @@
         cursor: pointer;
         transition: all 0.3s;
         border: none;
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
     }
 
     .profile-upload-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
     }
 
     .profile-upload-hint {
-        color: #6b7280;
+        color: var(--muted-foreground);
         font-size: 0.875rem;
         margin-top: 0.5rem;
         margin-bottom: 0;
@@ -257,7 +296,7 @@
 
     .profile-divider {
         height: 2px;
-        background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+        background: linear-gradient(90deg, transparent, var(--border), transparent);
         margin: 1.5rem 0;
     }
 
@@ -268,7 +307,7 @@
     .profile-form-label {
         display: block;
         font-weight: 600;
-        color: #374151;
+        color: var(--foreground);
         margin-bottom: 0.5rem;
         font-size: 1rem;
     }
@@ -276,16 +315,17 @@
     .profile-form-input {
         width: 100%;
         padding: 0.875rem 1rem;
-        border: 2px solid #e5e7eb;
+        border: 2px solid var(--border);
         border-radius: 0.5rem;
         font-size: 1rem;
         transition: all 0.2s;
-        background: white;
+        background: var(--background);
+        color: var(--foreground);
     }
 
     .profile-form-input:focus {
         outline: none;
-        border-color: #667eea;
+        border-color: var(--primary);
         box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
     }
 
@@ -294,7 +334,7 @@
     }
 
     .profile-error-text {
-        color: #ef4444;
+        color: var(--destructive);
         font-size: 0.875rem;
         margin-top: 0.5rem;
         margin-bottom: 0;
@@ -302,11 +342,12 @@
 
     .profile-modal-footer {
         padding: 1.5rem;
-        background: #f9fafb;
+        background: var(--background);
         display: flex;
         justify-content: flex-end;
         gap: 1rem;
-        border-top: 2px solid #e5e7eb;
+        border-top: 2px solid var(--border);
+        color: var(--foreground);
     }
 
     .profile-btn {
@@ -322,8 +363,8 @@
     }
 
     .profile-btn-cancel {
-        background: #6b7280;
-        color: white;
+        background: var(--secondary);
+        color: var(--secondary-foreground);
     }
 
     .profile-btn-cancel:hover {
@@ -333,8 +374,8 @@
     }
 
     .profile-btn-save {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
+        background: var(--accent);
+        color: var(--accent-foreground);
         box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
     }
 
@@ -401,8 +442,8 @@
         position: fixed;
         top: 20px;
         right: 20px;
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        color: white;
+        background: var(--accent);
+        color: var(--accent-foreground);
         padding: 1rem 1.5rem;
         border-radius: 0.75rem;
         box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);

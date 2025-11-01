@@ -19,7 +19,7 @@
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link" onclick="toggleUserDropdown(event)" id="userDropdownToggle">
                     <img src="{{ Auth::user() && Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : asset('assets/shahriar_khan_philosophy-B1MpPTGw.png') }}" 
-                         class="user-image rounded-circle shadow me-2"
+                         class="rounded-circle pb-1"
                          alt="User Image" 
                          style="width: 32px; height: 32px; object-fit: cover;" />
                     {{-- <span class="d-inline" style="color:aliceblue !important">{{ Auth::user() ? Auth::user()->name : 'Guest' }}</span> --}}
@@ -57,12 +57,54 @@
 </nav>
 
 <style>
+    :root {
+        --background: oklch(0.145 0 0);
+        --foreground: oklch(0.985 0 0);
+        --card: oklch(0.205 0 0);
+        --card-foreground: oklch(0.985 0 0);
+        --popover: oklch(0.269 0 0);
+        --popover-foreground: oklch(0.985 0 0);
+        --primary: oklch(0.922 0 0);
+        --primary-foreground: oklch(0.205 0 0);
+        --secondary: oklch(0.269 0 0);
+        --secondary-foreground: oklch(0.985 0 0);
+        --muted: oklch(0.269 0 0);
+        --muted-foreground: oklch(0.708 0 0);
+        --accent: oklch(0.371 0 0);
+        --accent-foreground: oklch(0.985 0 0);
+        --destructive: oklch(0.704 0.191 22.216);
+        --border: oklch(1 0 0 / 10%);
+        --input: oklch(1 0 0 / 15%);
+        --ring: oklch(0.556 0 0);
+        --chart-1: var(--color-blue-300);
+        --chart-2: var(--color-blue-500);
+        --chart-3: var(--color-blue-600);
+        --chart-4: var(--color-blue-700);
+        --chart-5: var(--color-blue-800);
+        --sidebar: oklch(0.205 0 0);
+        --sidebar-foreground: oklch(0.985 0 0);
+        --sidebar-primary: oklch(0.488 0.243 264.376);
+        --sidebar-primary-foreground: oklch(0.985 0 0);
+        --sidebar-accent: oklch(0.269 0 0);
+        --sidebar-accent-foreground: oklch(0.985 0 0);
+        --sidebar-border: oklch(1 0 0 / 10%);
+        --sidebar-ring: oklch(0.439 0 0);
+        --surface: oklch(0.2 0 0);
+        --surface-foreground: oklch(0.708 0 0);
+        --code: var(--surface);
+        --code-foreground: var(--surface-foreground);
+        --code-highlight: oklch(0.27 0 0);
+        --code-number: oklch(0.72 0 0);
+        --selection: oklch(0.922 0 0);
+        --selection-foreground: oklch(0.205 0 0);
+    }
+
     .custom-dropdown-menu {
         display: none;
         position: absolute;
         top: 100%;
         right: 0;
-        background: white;
+        background: var(--background);
         border-radius: 0.75rem;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         min-width: 280px;
@@ -70,6 +112,7 @@
         overflow: hidden;
         z-index: 1000;
         animation: dropdownSlideIn 0.2s ease;
+        color: var(--foreground);
     }
 
     .custom-dropdown-menu.show {
@@ -89,13 +132,15 @@
 
     .user-header-custom {
         background: #121212ff;
-        padding: 1.5rem;
+        padding: 0 !important;
+        margin: 0 !important;
         text-align: center;
         color: white;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        height: 160px;
     }
 
     .user-header-image {
@@ -104,7 +149,7 @@
         border-radius: 50%;
         object-fit: cover;
         border: 4px solid rgba(255, 255, 255, 0.3);
-        margin-bottom: 0.75rem;
+        /* margin-bottom: 0.75rem; */
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
@@ -142,8 +187,8 @@
     }
 
     .custom-dropdown-btn-edit {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
+        background: var(--accent);
+        color: var(--accent-foreground);
         box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
     }
 
@@ -153,7 +198,7 @@
     }
 
     .custom-dropdown-btn-logout {
-        background: #dc3545;
+        background: var(--destructive);
         color: white;
         box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
     }
