@@ -1,4 +1,4 @@
-<nav class="app-header navbar navbar-expand bg-body border-bottom border-4 " style=" background-color:#000000 !important">
+<nav class="app-header navbar navbar-expand bg-body" style=" background-color:#000000 !important">
     <div class="container-fluid">
         <ul class="navbar-nav" style="color:aliceblue !important;">
             <li class="nav-item">

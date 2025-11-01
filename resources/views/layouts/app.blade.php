@@ -132,7 +132,7 @@
   </head>
   <!--end::Head-->
   <!--begin::Body-->
-  <body class="layout-fixed sidebar-expand-lg sidebar-open bg-body-tertiary">
+  <body class="layout-fixed sidebar-expand-lg sidebar-mini sidebar-collapse bg-body-tertiary">
     <!--begin::App Wrapper-->
     <div class="app-wrapper">
       <!--begin::Header-->
@@ -454,7 +454,17 @@
       const sparkline3 = new ApexCharts(document.querySelector('#sparkline-3'), option_sparkline3);
       sparkline3.render();
     </script>
-    <!--end::Script-->
+  <!--end::Script-->
+  <style>
+    body.sidebar-collapse .app-sidebar {
+      display: none !important;
+    }
+
+    body.sidebar-collapse .app-main {
+      margin-left: 0 !important;
+      width: 100% !important;
+    }
+  </style>
   </body>
   <!--end::Body-->
 </html>

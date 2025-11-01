@@ -1,21 +1,21 @@
 <!-- Trigger Button -->
-<button type="button" class="btn btn-info btn-flat flex-grow-1" onclick="openProfileModal(event)" style="border-radius: 50px;">
+{{-- <button type="button" class="btn btn-info btn-flat flex-grow-1" onclick="openProfileModal(event)" style="border-radius: 50px;">
     <i class="bi bi-pencil-square me-1"></i> Edit Profile
-</button>
+</button> --}}
 
 <!-- Custom Modal Overlay -->
 <div id="profileModalOverlay" class="profile-modal-overlay" onclick="closeProfileModal()">
     <!-- Modal Container -->
     <div class="profile-modal-container" onclick="event.stopPropagation()">
         <!-- Modal Header -->
-        <div class="profile-modal-header">
+        {{-- <div class="profile-modal-header">
             <h3 class="profile-modal-title">
                 <i class="bi bi-person-circle me-2"></i>Edit Profile
             </h3>
             <button type="button" class="profile-modal-close" onclick="closeProfileModal()">
                 <i class="bi bi-x-lg"></i>
             </button>
-        </div>
+        </div> --}}
 
         <!-- Modal Body -->
         <div class="profile-modal-body">
