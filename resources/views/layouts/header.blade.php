@@ -1,19 +1,22 @@
-<nav class="custom-header" style="background-color:#000000 !important; border-bottom: 4px solid #1f2937;">
-    <div class="custom-header-container">
-        <!-- Left Side: Hamburger & Home -->
-        <div class="custom-header-left">
-            <button class="hamburger-btn" onclick="toggleSidebar(event)" id="hamburgerBtn">
-                <i class="bi bi-list" style="color:aliceblue !important; font-size: 1.5rem;"></i>
-            </button>
-            <a href="#" class="custom-nav-link home-link" style="color:aliceblue !important">Home</a>
-        </div>
-
-        <!-- Right Side: Fullscreen & User Menu -->
-        <div class="custom-header-right">
-            <button class="fullscreen-btn" onclick="toggleFullscreen(event)" id="fullscreenBtn">
-                <i id="fullscreenIcon" class="bi bi-arrows-fullscreen" style="color:aliceblue !important"></i>
-            </button>
-            <div class="user-menu-wrapper">
+<nav class="app-header navbar navbar-expand bg-body border-bottom border-4 " style=" background-color:#000000 !important">
+    <div class="container-fluid">
+        <ul class="navbar-nav" style="color:aliceblue !important;">
+            <li class="nav-item">
+                <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
+                    <i class="bi bi-list" style="color:aliceblue !important"></i>
+                </a>
+            </li>
+            <li class="nav-item d-none d-md-block"><a href="#" class="nav-link"
+                    style="color:aliceblue !important">Home</a></li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-lte-toggle="fullscreen">
+                    <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen" style="color:aliceblue !important"></i>
+                    <i data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none"></i>
+                </a>
+            </li>
+            <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link" onclick="toggleUserDropdown(event)" id="userDropdownToggle">
                     <img src="{{ Auth::user() && Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : asset('assets/shahriar_khan_philosophy-B1MpPTGw.png') }}" 
                          class="user-image rounded-circle shadow me-2"
@@ -48,93 +51,13 @@
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
+            </li>
+        </ul>
     </div>
 </nav>
 
 <style>
-    /* Custom Header Styles */
-    .custom-header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 1030;
-        padding: 0.75rem 1rem;
-    }
-
-    .custom-header-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        max-width: 100%;
-    }
-
-    .custom-header-left,
-    .custom-header-right {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .hamburger-btn,
-    .fullscreen-btn {
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        padding: 0.5rem;
-        border-radius: 0.375rem;
-        transition: all 0.2s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .hamburger-btn:hover,
-    .fullscreen-btn:hover {
-        background: rgba(255, 255, 255, 0.1);
-    }
-
-    .home-link {
-        text-decoration: none;
-        padding: 0.5rem 1rem;
-        border-radius: 0.375rem;
-        transition: all 0.2s;
-        display: none;
-    }
-
-    @media (min-width: 768px) {
-        .home-link {
-            display: block;
-        }
-    }
-
-    .home-link:hover {
-        background: rgba(255, 255, 255, 0.1);
-    }
-
-    .user-menu-wrapper {
-        position: relative;
-    }
-
-    .user-menu-toggle {
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .user-image {
-        width: 32px;
-        height: 32px;
-        object-fit: cover;
-    }
-
-    /* Custom Dropdown Menu */
+    .custom-dropdown-menu {
         display: none;
         position: absolute;
         top: 100%;
@@ -247,51 +170,6 @@
 </style>
 
 <script>
-    // Toggle Sidebar
-    function toggleSidebar(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        const sidebar = document.getElementById('customSidebar');
-        const overlay = document.getElementById('sidebarOverlay');
-        
-        if (sidebar && overlay) {
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-            document.body.classList.toggle('sidebar-open');
-        }
-    }
-
-    // Close Sidebar
-    function closeSidebar() {
-        const sidebar = document.getElementById('customSidebar');
-        const overlay = document.getElementById('sidebarOverlay');
-        
-        if (sidebar && overlay) {
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.classList.remove('sidebar-open');
-        }
-    }
-
-    // Toggle Fullscreen
-    function toggleFullscreen(event) {
-        event.preventDefault();
-        const icon = document.getElementById('fullscreenIcon');
-        
-        if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen();
-            icon.classList.remove('bi-arrows-fullscreen');
-            icon.classList.add('bi-fullscreen-exit');
-        } else {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-                icon.classList.remove('bi-fullscreen-exit');
-                icon.classList.add('bi-arrows-fullscreen');
-            }
-        }
-    }
-
-    // Toggle User Dropdown
     function toggleUserDropdown(event) {
         event.preventDefault();
         event.stopPropagation();
