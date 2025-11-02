@@ -21,7 +21,8 @@
     }
 
     .social-link-form .form-control::placeholder {
-        color: #888888;
+        color: #ffffff;
+        opacity: 0.7;
     }
 
     .social-link-form .input-group:hover .input-group-text {
@@ -77,9 +78,9 @@
 </style>
 
 
-<div class="row justify-content-center mt-4">
-    <div class="col-md-10 col-lg-8 p-5 rounded shadow bg-[#222222]">
-        <div class="social-link-form">
+<div class="row justify-content-center mt-4 overflow-hidden">
+    <div class="col-md-10 col-lg-8 p-5 rounded shadow bg-[#222222] overflow-hidden">
+        <div class="social-link-form overflow-hidden">
             <h3 class="mb-4 text-center !text-[#ffffff] text-3xl font-bold">Store Your Social Media Links</h3>
             <p class="text-center mb-5 text-[#e4e4e4]">Provide the full URL for each of your profiles.</p>
 
