@@ -92,7 +92,7 @@
                         [
                             'name' => 'twitter',
                             'icon' => 'fa-x-twitter',
-                            'color' => '#000000',
+                            'color' => '#ffffff',
                             'placeholder' => 'https://x.com/your-username',
                         ],
                         [

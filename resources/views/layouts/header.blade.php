@@ -22,7 +22,6 @@
                          class="rounded-circle pb-1"
                          alt="User Image" 
                          style="width: 32px; height: 32px; object-fit: cover;" />
-                    {{-- <span class="d-inline" style="color:aliceblue !important">{{ Auth::user() ? Auth::user()->name : 'Guest' }}</span> --}}
                 </a>
                 
                 <!-- Custom Dropdown Menu -->
