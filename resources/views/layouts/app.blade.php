@@ -1,10 +1,38 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" style="background-color: #030712 !important;">
 <!--begin::Head-->
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>@yield('title')</title>
+    <style>
+        /* Prevent white flash - loaded before anything else */
+        html, body, .app-wrapper, .app-main, .app-content {
+            background-color: #030712 !important;
+        }
+        
+        /* Prevent flash during page transitions */
+        body {
+            opacity: 1 !important;
+            transition: none !important;
+        }
+        
+        /* Ensure content area never shows white/empty */
+        .app-content {
+            min-height: 100vh;
+            background-color: #030712 !important;
+        }
+        
+        /* Smooth page transitions without flash */
+        .page-transition {
+            animation: fadeIn 0.15s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0.95; }
+            to { opacity: 1; }
+        }
+    </style>
     <!--begin::Accessibility Meta Tags-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
     <meta name="color-scheme" content="light dark" />
@@ -68,6 +96,16 @@
             }
         })();
     </script>
+
+    <!-- Prevent white flash on page navigation -->
+    <style>
+        html,
+        body {
+            background-color: #030712 !important;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 
     <!-- Custom Styles for Profile Modal and Dropdown -->
     <style>
@@ -143,9 +181,9 @@
 <!--end::Head-->
 <!--begin::Body-->
 
-<body class="layout-fixed sidebar-expand-lg sidebar-mini bg-body-tertiary">
+<body class="layout-fixed sidebar-expand-lg sidebar-mini bg-body-tertiary" style="background-color: #030712 !important;">
     <!--begin::App Wrapper-->
-    <div class="app-wrapper">
+    <div class="app-wrapper" style="background-color: #030712 !important;">
         <!--begin::Header-->
         @include('layouts.header')
         <!--end::Header-->
@@ -177,11 +215,10 @@
             @include('layouts.sidebar')
             <!--end::Sidebar Wrapper-->
         </aside>
-        <!--end::Sidebar-->
         <!--begin::App Main-->
-        <main class="app-main" style="background-color: #030712">
+        <main class="app-main page-transition" style="background-color: #030712 !important;">
             <!--begin::App Content-->
-            <div class="app-content" style="padding: 0px;">
+            <div class="app-content page-transition" style="padding: 0px; background-color: #030712 !important; min-height: 100vh;">
 
                 @yield('content')
 
@@ -303,6 +340,36 @@
             }).showToast();
         @endif
 
+        // Save and restore dropdown states
+        function saveDropdownStates() {
+            const openMenus = [];
+            document.querySelectorAll('.nav-item.menu-open').forEach(item => {
+                const link = item.querySelector('.nav-link');
+                if (link) {
+                    openMenus.push(link.textContent.trim());
+                }
+            });
+            localStorage.setItem('open-menus', JSON.stringify(openMenus));
+        }
+
+        function restoreDropdownStates() {
+            const openMenus = JSON.parse(localStorage.getItem('open-menus') || '[]');
+            openMenus.forEach(menuText => {
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    if (link.textContent.trim() === menuText) {
+                        const parentItem = link.closest('.nav-item');
+                        if (parentItem && parentItem.querySelector('.nav-treeview')) {
+                            parentItem.classList.add('menu-open');
+                            const submenu = parentItem.querySelector('.nav-treeview');
+                            if (submenu) {
+                                submenu.style.display = 'block';
+                            }
+                        }
+                    }
+                });
+            });
+        }
+
         // Fix sidebar behavior - only toggle on hamburger click, not on link clicks
         document.addEventListener('DOMContentLoaded', function() {
             // Get the sidebar toggle button
@@ -340,6 +407,9 @@
 
             // Initialize immediately
             initializeSidebar();
+
+            // Restore dropdown states from previous page
+            restoreDropdownStates();
 
             // Handle sidebar toggle button click
             if (sidebarToggle) {
@@ -384,6 +454,9 @@
                         return;
                     }
                     
+                    // Save dropdown states before navigation
+                    saveDropdownStates();
+                    
                     // For actual navigation links, only close sidebar on mobile
                     if (!isDesktop()) {
                         setTimeout(() => {
@@ -391,6 +464,13 @@
                         }, 200);
                     }
                 });
+            });
+
+            // Save dropdown states when any dropdown is toggled
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.nav-link')) {
+                    setTimeout(saveDropdownStates, 100);
+                }
             });
         });
     </script>
