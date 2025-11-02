@@ -18,8 +18,8 @@
             </li>
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link" onclick="toggleUserDropdown(event)" id="userDropdownToggle">
-                    <img src="{{ Auth::user() && Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : asset('assets/shahriar_khan_philosophy-B1MpPTGw.png') }}" 
-                         class="rounded-circle pb-1"
+                    <img src="{{ Auth::user() && Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) . '?v=' . time() : asset('assets/shahriar_khan_philosophy-B1MpPTGw.png') }}" 
+                         class="rounded-circle pb-1 user-profile-image"
                          alt="User Image" 
                          style="width: 32px; height: 32px; object-fit: cover;" />
                 </a>
@@ -27,8 +27,8 @@
                 <!-- Custom Dropdown Menu -->
                 <div id="userDropdownMenu" class="custom-dropdown-menu">
                     <div class="user-header-custom">
-                        <img src="{{ Auth::user() && Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : asset('assets/shahriar_khan_philosophy-B1MpPTGw.png') }}" 
-                             class="user-header-image" 
+                        <img src="{{ Auth::user() && Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) . '?v=' . time() : asset('assets/shahriar_khan_philosophy-B1MpPTGw.png') }}" 
+                             class="user-header-image user-profile-image" 
                              alt="User Image" />
                         <p class="user-header-name">
                             {{ Auth::user() ? Auth::user()->name : 'Guest' }}

@@ -27,7 +27,7 @@
                 <div class="profile-image-section">
                     <div class="profile-image-wrapper">
                         <img id="profileImagePreview" 
-                             src="{{ Auth::user() && Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : asset('assets/shahriar_khan_philosophy-B1MpPTGw.png') }}" 
+                             src="{{ Auth::user() && Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) . '?v=' . time() : asset('assets/shahriar_khan_philosophy-B1MpPTGw.png') }}" 
                              alt="Profile Preview" 
                              class="profile-preview-image">
                         <div class="profile-image-badge">
@@ -474,11 +474,33 @@
 </style>
 
 <script>
+    // Auto-show success toast and close modal
     setTimeout(() => {
         const toast = document.getElementById('successToast');
         if (toast) {
             setTimeout(() => toast.remove(), 300);
         }
     }, 3000);
+    
+    // Close modal on success
+    closeProfileModal();
+    
+    // Update all profile images on the page with cache-busting to show new image immediately
+    setTimeout(() => {
+        const timestamp = new Date().getTime();
+        
+        // Update all images with class user-profile-image
+        document.querySelectorAll('.user-profile-image').forEach(img => {
+            const currentSrc = img.src.split('?')[0];
+            img.src = currentSrc + '?v=' + timestamp;
+        });
+        
+        // Force reload of modal preview image
+        const previewImg = document.getElementById('profileImagePreview');
+        if (previewImg) {
+            const currentSrc = previewImg.src.split('?')[0];
+            previewImg.src = currentSrc + '?v=' + timestamp;
+        }
+    }, 100);
 </script>
 @endif
