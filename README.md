@@ -63,6 +63,7 @@ For detailed cPanel deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md)
 ## Documentation
 
 - [cPanel Deployment Guide](CPANEL_DEPLOYMENT.md) - Complete cPanel deployment instructions
+- [cPanel Web Server Setup](CPANEL_WEBSERVER.md) - How to run Laravel in cPanel (no `artisan serve` needed!)
 - [cPanel Commands Reference](CPANEL_COMMANDS.md) - Quick reference for common commands
 - [cPanel PDO Fix](CPANEL_FIX.md) - Troubleshooting guide for PDO issues
 

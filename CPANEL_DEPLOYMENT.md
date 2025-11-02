@@ -89,6 +89,22 @@ cd ~/public_html
 composer install --optimize-autoloader --no-dev
 ```
 
+## Step 4.5: Check PHP Extensions (Important!)
+
+Before running migrations, verify all required PHP extensions are enabled:
+
+```bash
+# Run the extension checker
+chmod +x check-php-extensions.sh
+./check-php-extensions.sh
+```
+
+If any extensions are missing (especially **mbstring**):
+1. Go to cPanel → **Software** → **Select PHP Version**
+2. Click **Extensions**
+3. Enable missing extensions (mbstring, xml, etc.)
+4. Save changes
+
 ## Step 5: Run Migrations
 
 ```bash

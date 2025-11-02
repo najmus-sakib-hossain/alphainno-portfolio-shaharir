@@ -79,6 +79,49 @@ PDO
 pdo_sqlite
 ```
 
+## Error: Call to undefined function mb_split()
+
+This means the **mbstring** extension is not enabled.
+
+### Solution 1: Enable in cPanel (Recommended)
+
+1. Log in to cPanel
+2. Go to **Software** → **Select PHP Version**
+3. Click **Extensions** or **Options**
+4. Check/enable **mbstring**
+5. Save changes
+
+### Solution 2: Use MultiPHP INI Editor
+
+1. Go to cPanel → **Software** → **MultiPHP INI Editor**
+2. Select your domain
+3. Add or uncomment: `extension=mbstring`
+4. Save
+
+### Solution 3: Check Missing Extensions
+
+Upload and run the diagnostic script:
+```bash
+chmod +x check-php-extensions.sh
+./check-php-extensions.sh
+```
+
+This will show you all missing Laravel extensions.
+
+## Required PHP Extensions for Laravel
+
+- PDO
+- pdo_mysql (or pdo_sqlite)
+- mbstring ⚠️ (commonly missing)
+- xml
+- ctype
+- json
+- bcmath
+- openssl
+- tokenizer
+- fileinfo
+- curl
+
 ## Alternative: Switch to MySQL
 
 If SQLite continues to cause issues, you can switch to MySQL (most cPanel accounts have this):
