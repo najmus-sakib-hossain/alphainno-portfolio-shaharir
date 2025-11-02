@@ -49,6 +49,26 @@
     <!-- Alpine.js for interactive components -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+    <!-- Prevent sidebar flash on page load -->
+    <script>
+        // This runs immediately to prevent flash
+        (function() {
+            const isDesktop = window.innerWidth >= 992;
+            const sidebarCollapsed = localStorage.getItem('sidebar-collapsed');
+            
+            if (isDesktop && sidebarCollapsed !== 'true') {
+                // Desktop and sidebar should be open
+                document.documentElement.classList.remove('sidebar-collapse');
+            } else if (!isDesktop) {
+                // Mobile - collapse by default
+                document.documentElement.classList.add('sidebar-collapse');
+            } else if (sidebarCollapsed === 'true') {
+                // User preference to collapse
+                document.documentElement.classList.add('sidebar-collapse');
+            }
+        })();
+    </script>
+
     <!-- Custom Styles for Profile Modal and Dropdown -->
     <style>
         /* Ensure modal appears above everything */
@@ -123,7 +143,7 @@
 <!--end::Head-->
 <!--begin::Body-->
 
-<body class="layout-fixed sidebar-expand-lg sidebar-mini sidebar-collapse bg-body-tertiary">
+<body class="layout-fixed sidebar-expand-lg sidebar-mini bg-body-tertiary">
     <!--begin::App Wrapper-->
     <div class="app-wrapper">
         <!--begin::Header-->
@@ -282,6 +302,90 @@
                 backgroundColor: "linear-gradient(to right, #FF5F6D, #FFC371)",
             }).showToast();
         @endif
+
+        // Fix sidebar behavior - only toggle on hamburger click, not on link clicks
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the sidebar toggle button
+            const sidebarToggle = document.querySelector('[data-lte-toggle="sidebar"]');
+            
+            const body = document.body;
+            
+            // Check if viewport is desktop size
+            function isDesktop() {
+                return window.innerWidth >= 992; // Bootstrap lg breakpoint
+            }
+
+            // Initialize sidebar state based on screen size and saved preference
+            function initializeSidebar() {
+                const sidebarCollapsed = localStorage.getItem('sidebar-collapsed');
+                
+                // Copy class from html to body if needed
+                if (document.documentElement.classList.contains('sidebar-collapse')) {
+                    body.classList.add('sidebar-collapse');
+                }
+                
+                if (isDesktop()) {
+                    // On desktop, check saved preference
+                    if (sidebarCollapsed === 'true') {
+                        body.classList.add('sidebar-collapse');
+                    } else {
+                        // Default to open on desktop
+                        body.classList.remove('sidebar-collapse');
+                    }
+                } else {
+                    // On mobile, always collapse by default
+                    body.classList.add('sidebar-collapse');
+                }
+            }
+
+            // Initialize immediately
+            initializeSidebar();
+
+            // Handle sidebar toggle button click
+            if (sidebarToggle) {
+                sidebarToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    body.classList.toggle('sidebar-collapse');
+                    
+                    // Save preference to localStorage
+                    if (body.classList.contains('sidebar-collapse')) {
+                        localStorage.setItem('sidebar-collapsed', 'true');
+                    } else {
+                        localStorage.setItem('sidebar-collapsed', 'false');
+                    }
+                });
+            }
+
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (isDesktop()) {
+                    // On desktop, respect user's preference
+                    const collapsed = localStorage.getItem('sidebar-collapsed');
+                    if (collapsed !== 'true') {
+                        body.classList.remove('sidebar-collapse');
+                    }
+                } else {
+                    // On mobile, collapse by default
+                    body.classList.add('sidebar-collapse');
+                }
+            });
+
+            // Prevent sidebar from closing when clicking on nav links
+            const sidebarLinks = document.querySelectorAll('.sidebar-menu .nav-link');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Don't close sidebar on link click
+                    e.stopPropagation();
+                    
+                    // Only close on mobile
+                    if (!isDesktop()) {
+                        setTimeout(() => {
+                            body.classList.add('sidebar-collapse');
+                        }, 200);
+                    }
+                });
+            });
+        });
     </script>
     <script>
         // NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
@@ -434,13 +538,60 @@
     </script>
     <!--end::Script-->
     <style>
-        body.sidebar-collapse .app-sidebar {
-            display: none !important;
-        }
-
-        body.sidebar-collapse .app-main {
+        /* Remove all margin-left from app-main */
+        .app-main {
             margin-left: 0 !important;
             width: 100% !important;
+        }
+
+        /* Desktop sidebar behavior */
+        @media (min-width: 992px) {
+            /* Sidebar open by default on desktop */
+            body:not(.sidebar-collapse) .app-sidebar {
+                transform: translateX(0) !important;
+            }
+            
+            /* Sidebar collapsed on desktop */
+            body.sidebar-collapse .app-sidebar {
+                transform: translateX(-250px) !important;
+            }
+        }
+
+        /* Mobile sidebar behavior */
+        @media (max-width: 991px) {
+            /* Sidebar hidden by default on mobile */
+            .app-sidebar {
+                position: fixed !important;
+                z-index: 1040 !important;
+                transform: translateX(-250px);
+                transition: transform 0.3s ease;
+            }
+            
+            body:not(.sidebar-collapse) .app-sidebar {
+                transform: translateX(0) !important;
+            }
+            
+            body.sidebar-collapse .app-sidebar {
+                transform: translateX(-250px) !important;
+            }
+
+            /* Overlay when sidebar is open on mobile */
+            body:not(.sidebar-collapse)::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1039;
+            }
+        }
+
+        /* Smooth transitions */
+        .app-sidebar,
+        .app-main {
+            transition: all 0.3s ease;
         }
     </style>
 </body>
