@@ -5,31 +5,41 @@
 @section('content')
 <style>
     .social-link-form .input-group-text {
-        background-color: #f8f9fa;
+        background-color: #1a1a1a;
+        border: 1px solid #333333;
         border-right: none;
-        color: #495057;
+        color: #e4e4e4;
         transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     .social-link-form .form-control {
+        background-color: #111111;
+        border: 1px solid #333333;
         border-left: none;
+        color: #ffffff;
         transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
+    .social-link-form .form-control::placeholder {
+        color: #888888;
+    }
+
     .social-link-form .input-group:hover .input-group-text {
-        background-color: #e9ecef;
+        background-color: #252525;
         transform: scale(1.05);
     }
 
     .social-link-form .form-control:focus {
+        background-color: #0a0a0a;
         border-color: #007bff;
-        box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+        color: #ffffff;
     }
 
     .social-link-form .btn-primary {
         background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
         border: none;
-        border-radius: 50px;
+        border-radius: 8px;
         padding: 12px 24px;
         font-size: 1.1rem;
         font-weight: 600;
@@ -37,12 +47,13 @@
         letter-spacing: 1px;
         transition: all 0.3s ease;
         box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+        color: #ffffff;
     }
 
     .social-link-form .btn-primary:hover {
         background: linear-gradient(135deg, #0056b3 0%, #003d82 100%);
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5);
+        box-shadow: 0 6px 20px rgba(0, 123, 255, 0.6);
     }
 
     .social-link-form .btn-primary:active {
@@ -59,14 +70,18 @@
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         letter-spacing: 0.5px;
     }
+
+    .social-link-form .form-label {
+        color: #ffffff;
+    }
 </style>
 
 
 <div class="row justify-content-center mt-4">
     <div class="col-md-10 col-lg-8 p-5 rounded shadow bg-[#222222]">
         <div class="social-link-form">
-            <h3 class="mb-4 text-center header-title">Store Your Social Media Links</h3>
-            <p class="text-center mb-5 text-blue-600">Provide the full URL for each of your profiles.</p>
+            <h3 class="mb-4 text-center !text-[#ffffff] text-3xl font-bold">Store Your Social Media Links</h3>
+            <p class="text-center mb-5 text-[#e4e4e4]">Provide the full URL for each of your profiles.</p>
 
             <form action="{{ route('social-links') }}" method="POST">
                 @csrf
@@ -126,18 +141,18 @@
 
                 @foreach($socials as $social)
                     <div class="mb-3">
-                        <label for="{{ $social['name'] }}-url" class="form-label visually-hidden">{{ ucfirst($social['name']) }} URL</label>
+                        <label for="{{ $social['name'] }}-url" class="form-label visually-hidden !text-white ">{{ ucfirst($social['name']) }} URL</label>
                         <div class="input-group input-group-md">
-                            <span class="input-group-text" id="{{ $social['name'] }}-addon">
+                            <span class="input-group-text !bg-[#111111]" id="{{ $social['name'] }}-addon">
                                 <i class="fab {{ $social['icon'] }}" style="color: {{ $social['color'] }};"></i>
                             </span>
-                            <input type="url" class="form-control" id="{{ $social['name'] }}-url" name="{{ $social['name'] }}-url" placeholder="{{ $social['placeholder'] }}" aria-label="{{ ucfirst($social['name']) }} URL" aria-describedby="{{ $social['name'] }}-addon">
+                            <input type="url" class="form-control !text-white" id="{{ $social['name'] }}-url" name="{{ $social['name'] }}-url" placeholder="{{ $social['placeholder'] }}" aria-label="{{ ucfirst($social['name']) }} URL" aria-describedby="{{ $social['name'] }}-addon">
                         </div>
                     </div>
                 @endforeach
 
                 <div class="d-grid mt-4">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="rounded-md bg-[#0a0a0a] p-4 !text-white">
                         <i class="fas fa-save me-2"></i> Save Social Links
                     </button>
                 </div>
