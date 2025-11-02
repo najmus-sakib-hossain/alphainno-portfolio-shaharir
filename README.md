@@ -34,13 +34,24 @@ For detailed cPanel deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md)
 3. Copy `.env.cpanel` to `.env` and update credentials
 4. Run the setup script:
    ```bash
-   chmod +x cpanel-migrate.sh
-   ./cpanel-migrate.sh
+   chmod +x cpanel-setup.sh
+   ./cpanel-setup.sh
    ```
+5. Create admin user:
+   ```bash
+   chmod +x create-admin-user.sh
+   ./create-admin-user.sh
+   ```
+   Or visit: `https://yourdomain.com/admin/auto-login`
+
+**Admin Credentials:**
+- Email: `shahriar@gmail.com`
+- Password: `shahriar@password.com`
 
 **Manual Migration:**
 ```bash
 /opt/cpanel/ea-php83/root/usr/bin/php artisan migrate
+/opt/cpanel/ea-php83/root/usr/bin/php artisan db:seed --class=AdminUserSeeder
 ```
 
 ## Requirements

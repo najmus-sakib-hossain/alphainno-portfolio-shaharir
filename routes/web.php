@@ -42,7 +42,19 @@ use App\Http\Controllers\Backend\Technology\CertificateController;
 Route::prefix('/admin')->group(function () {
 
     Route::get('/auto-login', function () {
-        \Illuminate\Support\Facades\Auth::login(\App\Models\User::first());
+        $user = \App\Models\User::where('email', 'shahriar@gmail.com')->first();
+        
+        if (!$user) {
+            // Create the user if it doesn't exist
+            $user = \App\Models\User::create([
+                'name' => 'Shahriar Khan',
+                'email' => 'shahriar@gmail.com',
+                'password' => \Illuminate\Support\Facades\Hash::make('shahriar@password.com'),
+                'email_verified_at' => now(),
+            ]);
+        }
+        
+        \Illuminate\Support\Facades\Auth::login($user);
         return redirect('/admin');
     });
 
