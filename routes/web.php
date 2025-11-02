@@ -49,7 +49,7 @@ Route::prefix('/admin')->group(function () {
             $user = \App\Models\User::create([
                 'name' => 'Shahriar Khan',
                 'email' => 'shahriar@gmail.com',
-                'password' => \Illuminate\Support\Facades\Hash::make('shahriar@password.com'),
+                'password' => \Illuminate\Support\Facades\Hash::make('shahriar@password'),
                 'email_verified_at' => now(),
             ]);
         }

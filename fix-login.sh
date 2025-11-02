@@ -48,7 +48,7 @@ echo "3. Resetting password to ensure it's correct..."
 $PHP_BIN artisan tinker --execute="
 \$user = App\Models\User::where('email', 'shahriar@gmail.com')->first();
 if (\$user) {
-    \$user->password = Hash::make('shahriar@password.com');
+    \$user->password = Hash::make('shahriar@password');
     \$user->email_verified_at = now();
     \$user->save();
     echo 'Password reset successfully!';
@@ -96,7 +96,7 @@ echo "=========================================="
 echo ""
 echo "Credentials:"
 echo "  Email: shahriar@gmail.com"
-echo "  Password: shahriar@password.com"
+echo "  Password: shahriar@password"
 echo ""
 echo "Try logging in at:"
 echo "  https://notesofshahriar.com/admin/login"

@@ -75,7 +75,7 @@
         <!-- Avatar Section -->
         <div class="flex flex-col items-center">
             <img class="w-16 h-16 rounded-full border-4 border-gray-400 shadow-md object-cover"
-                 src="https://placehold.co/80x80/1F2937/ffffff?text=U"
+                 src="{{ Auth::user() && Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) . '?v=' . time() : asset('assets/shahriar_khan_philosophy-B1MpPTGw.png') }}"
                  alt="User Avatar"
                  onerror="this.onerror=null; this.src='https://placehold.co/80x80/1F2937/ffffff?text=User'">
             <h1 class="mt-3 text-xl font-bold text-gray-900 transition-colors duration-300">Welcome Back</h1>

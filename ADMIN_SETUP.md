@@ -3,7 +3,7 @@
 ## Default Admin Credentials
 
 - **Email:** `shahriar@gmail.com`
-- **Password:** `shahriar@password.com`
+- **Password:** `shahriar@password`
 
 ## Setup Methods
 
@@ -46,7 +46,7 @@ After creating the user (using Method 1 or 2):
 1. Visit: `https://yourdomain.com/admin/login`
 2. Enter:
    - Email: `shahriar@gmail.com`
-   - Password: `shahriar@password.com`
+   - Password: `shahriar@password`
 3. Click Login
 
 ## For Local Development

@@ -39,7 +39,7 @@ if [ $? -eq 0 ]; then
     echo ""
     echo "Admin Credentials:"
     echo "  Email: shahriar@gmail.com"
-    echo "  Password: shahriar@password.com"
+    echo "  Password: shahriar@password"
     echo ""
     echo "You can now:"
     echo "  1. Visit: https://yourdomain.com/admin/auto-login"

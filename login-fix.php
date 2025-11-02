@@ -51,7 +51,7 @@ use Illuminate\Support\Facades\DB;
             $user = User::create([
                 'name' => 'Shahriar Khan',
                 'email' => 'shahriar@gmail.com',
-                'password' => Hash::make('shahriar@password.com'),
+                'password' => Hash::make('shahriar@password'),
                 'email_verified_at' => now(),
             ]);
             echo "<p class='success'>✓ User created successfully!</p>";
@@ -63,17 +63,17 @@ use Illuminate\Support\Facades\DB;
         // 2. Reset password
         echo "<div class='box'>";
         echo "<h3>2. Resetting Password...</h3>";
-        $user->password = Hash::make('shahriar@password.com');
+        $user->password = Hash::make('shahriar@password');
         $user->email_verified_at = now();
         $user->save();
-        echo "<p class='success'>✓ Password reset to: shahriar@password.com</p>";
+        echo "<p class='success'>✓ Password reset to: shahriar@password</p>";
         echo "</div>";
         
         // 3. Verify password
         echo "<div class='box'>";
         echo "<h3>3. Verifying Password...</h3>";
         $freshUser = User::where('email', 'shahriar@gmail.com')->first();
-        if (Hash::check('shahriar@password.com', $freshUser->password)) {
+        if (Hash::check('shahriar@password', $freshUser->password)) {
             echo "<p class='success'>✓ Password verification successful!</p>";
         } else {
             echo "<p class='error'>✗ Password verification failed!</p>";
@@ -108,7 +108,7 @@ use Illuminate\Support\Facades\DB;
         echo "<div class='box' style='background: #d4edda; border: 1px solid #c3e6cb;'>";
         echo "<h2 class='success'>✓ Fix Complete!</h2>";
         echo "<p><strong>Email:</strong> shahriar@gmail.com</p>";
-        echo "<p><strong>Password:</strong> shahriar@password.com</p>";
+        echo "<p><strong>Password:</strong> shahriar@password</p>";
         echo "<p><a href='/admin/login' style='color: blue; text-decoration: underline;'>Go to Login Page</a></p>";
         echo "<p><a href='/admin/auto-login' style='color: blue; text-decoration: underline;'>Use Auto-Login</a></p>";
         echo "</div>";
@@ -132,10 +132,10 @@ use Illuminate\Support\Facades\DB;
             echo "</ul>";
             
             // Test password
-            if (Hash::check('shahriar@password.com', $user->password)) {
-                echo "<p class='success'>✓ Password matches 'shahriar@password.com'</p>";
+            if (Hash::check('shahriar@password', $user->password)) {
+                echo "<p class='success'>✓ Password matches 'shahriar@password'</p>";
             } else {
-                echo "<p class='error'>✗ Password does NOT match 'shahriar@password.com'</p>";
+                echo "<p class='error'>✗ Password does NOT match 'shahriar@password'</p>";
             }
         } else {
             echo "<p class='error'>✗ User not found!</p>";

@@ -46,7 +46,7 @@ For detailed cPanel deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md)
 
 **Admin Credentials:**
 - Email: `shahriar@gmail.com`
-- Password: `shahriar@password.com`
+- Password: `shahriar@password`
 
 **Manual Migration:**
 ```bash
