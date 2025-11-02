@@ -63,10 +63,10 @@
 
 
 <div class="row justify-content-center mt-4">
-    <div class="col-md-10 col-lg-8 p-5 rounded shadow bg-white">
+    <div class="col-md-10 col-lg-8 p-5 rounded shadow bg-[#222222]">
         <div class="social-link-form">
             <h3 class="mb-4 text-center header-title">Store Your Social Media Links</h3>
-            <p class="text-center text-muted mb-5">Provide the full URL for each of your profiles.</p>
+            <p class="text-center mb-5 text-blue-600">Provide the full URL for each of your profiles.</p>
 
             <form action="{{ route('social-links') }}" method="POST">
                 @csrf

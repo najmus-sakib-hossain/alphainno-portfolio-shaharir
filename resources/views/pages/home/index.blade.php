@@ -24,7 +24,7 @@
                                 @endphp
                                 @if($mainImage)
                                     <div class="card mb-2" style="max-width: 200px;">
-                                        <img src="{{ $mainImage->getUrl() }}" class="card-img-top" alt="Main Image">
+                                        <img src="{{ $mainImage->getUrl() }}" class="card-img-top" alt="Main Image Updated">
                                     </div>
                                 @else
                                     <p>No main image uploaded.</p>

