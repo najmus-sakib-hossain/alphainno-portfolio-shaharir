@@ -374,10 +374,17 @@
             const sidebarLinks = document.querySelectorAll('.sidebar-menu .nav-link');
             sidebarLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
-                    // Don't close sidebar on link click
-                    e.stopPropagation();
+                    // Check if this is a treeview toggle (has submenu)
+                    const parentItem = this.closest('.nav-item');
+                    const hasSubmenu = parentItem && parentItem.querySelector('.nav-treeview');
                     
-                    // Only close on mobile
+                    // If it has a submenu, let AdminLTE handle it (don't prevent default)
+                    if (hasSubmenu && this.getAttribute('href') === '#') {
+                        // Don't prevent default, let treeview work
+                        return;
+                    }
+                    
+                    // For actual navigation links, only close sidebar on mobile
                     if (!isDesktop()) {
                         setTimeout(() => {
                             body.classList.add('sidebar-collapse');
