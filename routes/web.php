@@ -37,7 +37,8 @@ use App\Http\Controllers\Backend\Technology\CertificateController;
 
 // use Illuminate\Support\Facades\Route;
 
-
+// Public Publications Page
+Route::get('/publications', [PublicationSummeryController::class, 'publicIndex'])->name('publications.public');
 
 Route::prefix('/admin')->group(function () {
 

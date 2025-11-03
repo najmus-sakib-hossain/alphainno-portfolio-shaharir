@@ -17,6 +17,15 @@ class PublicationSummeryController extends Controller
     }
 
     /**
+     * Display public publications page.
+     */
+    public function publicIndex()
+    {
+        $publications = PublicationSummery::latest()->get();
+        return view('pages.publications.public', compact('publications'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
